@@ -29,7 +29,7 @@
 			</el-table-column>
 			<el-table-column prop="birthday" label="生日" width="120" sortable>
 			</el-table-column>
-			<el-table-column prop="addr" label="地址" min-width="180" sortable>
+			<el-table-column prop="address" label="地址" min-width="180" sortable>
 			</el-table-column>
 			<el-table-column label="操作" width="150">
 				<template scope="scope">
@@ -177,7 +177,6 @@
 					this.total = res.data.total;
 					//this.users = res.data.users;
 					this.users = res.data
-					console.log(this.users);
 					this.listLoading = false;
 					//NProgress.done();
 				});
