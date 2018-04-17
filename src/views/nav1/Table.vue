@@ -42,15 +42,15 @@
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
 			<el-button type="danger" @click="batchRemove" :disabled="this.sels.length===0">批量删除</el-button>
-			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="20" :total="total" style="float:right;">
+			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="page_size" :total="total" style="float:right;">
 			</el-pagination>
 		</el-col>
 
 		<!--编辑界面-->
 		<el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
 			<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
-				<el-form-item label="姓名" prop="name">
-					<el-input v-model="editForm.name" auto-complete="off"></el-input>
+				<el-form-item label="姓名" prop="names">
+					<el-input v-model="editForm.names" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="性别">
 					<el-radio-group v-model="editForm.sex">
@@ -62,10 +62,10 @@
 					<el-input-number v-model="editForm.age" :min="0" :max="200"></el-input-number>
 				</el-form-item>
 				<el-form-item label="生日">
-					<el-date-picker type="date" placeholder="选择日期" v-model="editForm.birth"></el-date-picker>
+					<el-date-picker type="date" placeholder="选择日期" v-model="editForm.birthday"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="地址">
-					<el-input type="textarea" v-model="editForm.addr"></el-input>
+					<el-input type="textarea" v-model="editForm.address"></el-input>
 				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
@@ -118,6 +118,7 @@
 				users: [],
 				total: 0,
 				page: 1,
+				page_size:20,
 				listLoading: false,
 				sels: [],//列表选中列
 
@@ -131,11 +132,11 @@
 				//编辑界面数据
 				editForm: {
 					id: 0,
-					name: '',
+					names: '',
 					sex: -1,
 					age: 0,
-					birth: '',
-					addr: ''
+					birthday: '',
+					address: ''
 				},
 
 				addFormVisible: false,//新增界面是否显示
@@ -169,14 +170,15 @@
 			getUsers() {
 				let para = {
 					page: this.page,
-					name: this.filters.name
+					name: this.filters.name,
 				};
 				this.listLoading = true;
 				//NProgress.start();
 				getUserListPage(para).then((res) => {
 					this.total = res.data.total;
 					//this.users = res.data.users;
-					this.users = res.data
+					this.page_size = res.data.per_page;
+					this.users = res.data.data
 					this.listLoading = false;
 					//NProgress.done();
 				});
