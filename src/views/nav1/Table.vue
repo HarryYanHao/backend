@@ -49,7 +49,7 @@
 		<!--编辑界面-->
 		<el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
 			<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
-				<el-form-item label="姓名" prop="names">
+				<el-form-item label="姓名" prop="name">
 					<el-input v-model="editForm.names" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="性别">
@@ -77,8 +77,8 @@
 		<!--新增界面-->
 		<el-dialog title="新增" v-model="addFormVisible" :close-on-click-modal="false">
 			<el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
-				<el-form-item label="姓名" prop="name">
-					<el-input v-model="addForm.name" auto-complete="off"></el-input>
+				<el-form-item label="姓名" prop="names">
+					<el-input v-model="addForm.names" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="性别">
 					<el-radio-group v-model="addForm.sex">
@@ -90,10 +90,10 @@
 					<el-input-number v-model="addForm.age" :min="0" :max="200"></el-input-number>
 				</el-form-item>
 				<el-form-item label="生日">
-					<el-date-picker type="date" placeholder="选择日期" v-model="addForm.birth"></el-date-picker>
+					<el-date-picker type="date" placeholder="选择日期" v-model="addForm.birthday"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="地址">
-					<el-input type="textarea" v-model="addForm.addr"></el-input>
+					<el-input type="textarea" v-model="addForm.address"></el-input>
 				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
@@ -142,17 +142,17 @@
 				addFormVisible: false,//新增界面是否显示
 				addLoading: false,
 				addFormRules: {
-					name: [
+					names: [
 						{ required: true, message: '请输入姓名', trigger: 'blur' }
 					]
 				},
 				//新增界面数据
 				addForm: {
-					name: '',
+					names: '',
 					sex: -1,
 					age: 0,
-					birth: '',
-					addr: ''
+					birthday: '',
+					address: ''
 				}
 
 			}
@@ -252,7 +252,7 @@
 							this.addLoading = true;
 							//NProgress.start();
 							let para = Object.assign({}, this.addForm);
-							para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd');
+							para.birth = (!para.birthday || para.birthday == '') ? '' : util.formatDate.format(new Date(para.birthday), 'yyyy-MM-dd');
 							addUser(para).then((res) => {
 								this.addLoading = false;
 								//NProgress.done();
