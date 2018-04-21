@@ -8,6 +8,7 @@ import user from './views/nav1/user.vue'
 import Page4 from './views/nav2/Page4.vue'
 import Page5 from './views/nav2/Page5.vue'
 import Page6 from './views/nav3/Page6.vue'
+import Artical from './views/nav1/Artical.vue'
 import echarts from './views/charts/echarts.vue'
 
 let routes = [
@@ -34,6 +35,7 @@ let routes = [
             { path: '/table', component: Table, name: 'Table' },
             { path: '/form', component: Form, name: 'Form' },
             { path: '/user', component: user, name: '列表' },
+            { path: '/artical', component:Artical, name:'文章'},
         ]
     },
     {

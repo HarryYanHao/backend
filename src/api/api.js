@@ -16,3 +16,5 @@ export const batchRemoveUser = params => { return axios.delete(`${base}/user/bat
 export const editUser = params => { return axios.put(`${base}/user/edit`, { params: params }); };
 
 export const addUser = params => { return axios.post(`${base}/user/add`, { params: params }); };
+
+export const getArticalList = params => {return axios.get(`${base}/artical/list`, { params: params }); };
