@@ -18,3 +18,6 @@ export const editUser = params => { return axios.put(`${base}/user/edit`, { para
 export const addUser = params => { return axios.post(`${base}/user/add`, { params: params }); };
 
 export const getArticalList = params => {return axios.get(`${base}/artical/list`, { params: params }); };
+
+
+export const getGoodsListPage = params => {return axios.get(`${base}/goods/list`, { params: params }); };
